@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>{% block title %} BARRIOS CERRADOS {% endblock %}</title>
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   
+    <script src="{{
+      asset('bower_components/jquery/js/jquery.min.js')
+    }}"></script>
+    {% block stylesheets %}
+    {% endblock %}
+ 
+ <!-- FIN PARA EL FOTTER -->
+  
+ 
+      <body>
+                  {% block content %} {% block body %}{% endblock %} {% endblock
+                  content %}
+                 
+
+
+ 
+
+
+        {% block javascripts %}
+         
+    
+        {% endblock %}
+
+  </body>
+</html>

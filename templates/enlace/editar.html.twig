@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ parent() }} {% endblock %}
+
+
+
+{% block body %}
+<div class="page-header card">
+  <div class="card-block">
+    <h5 class="m-b-10">Editar contenido N° {{ enlace.id  }}</h5>
+
+  </div>
+</div>
+
+<div class="page-body">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-block table-border-style">
+          {{ include("enlace/_form.html.twig") }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('js/tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>
+
+  <script>
+    tinymce.init({
+      language: 'es',
+      selector: "#enlace_texto",
+      branding: false,
+      menubar: true,
+      statusbar: true,
+      plugins: "link image",
+      images_upload_url: "{{ path('upload_adjunto')}}",
+      automatic_uploads: true,
+      relative_urls: false,
+      remove_script_host: false,
+      file_picker_types: 'file image media',
+      toolbar:
+              "bold italic | " +
+              "alignleft aligncenter alignright alignjustify | " +
+              "bullist numlist checklist outdent indent | link media",
+    });
+
+
+    $(document).ready(function () {
+      $("#enlace_url").prop( "disabled", true );
+    });
+
+    $("#enlace_interno").on('change', function ()
+    {
+
+      var interno = $("#enlace_interno").val();
+
+      if(interno==0)
+      {
+        $("#enlace_url").prop( "disabled", false);
+        $("#enlace_url").attr('data-validation','url');
+
+      }
+      else
+      {
+        $("#enlace_url").prop( "disabled", true );
+        $("#enlace_url").val(null);
+        $("#enlace_url").removeAttr('data-validation');
+
+      }
+    });
+
+  </script>
+
+{% endblock %}

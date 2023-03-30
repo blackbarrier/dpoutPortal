@@ -1,0 +1,241 @@
+{% extends 'base_public.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+    <div class="container mt-5" style="margin-bottom: 50px">
+
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        <h1 class="titulo">BIBLIOTECA OBSERVATORIO POBLACIONAL MIGRANTES</h1>
+        <p class="bajadaarea1">
+            En este espacio encontrarán documentos, artículos, guías sobre la temática
+            poblacional este material tiene distintas autorías y un espacio para
+            colaboraciones.
+        </p>
+
+        <p class="bajadaarea1">
+            Encontrá investigaciones, guías, libros y otros materiales elaborados por
+            otros organismos e instituciones. Colaboraciones…
+        </p>
+
+        <p class="bajadaarea1">
+            Envianos tu contenido para que quede publicado en nuestro portal desde el
+            siguiente
+            <button type="button" class="btn-rounded ml-2 pull-right" data-descripcion="Nuevo Contenido" data-toggle="modal" data-target="#modal-nuevo-contenido">
+                <i class="fa fa-book"></i> link
+            </button>
+        </p>
+
+        {% include ('default/links.html.twig') %}
+
+        {% if enlaces|length > 0 %}
+            <div class="row justify-content-md-center mt-5">
+                <div class="col-md-12">
+                    <div class="list-group">
+                        {% for enlace in enlaces %}
+
+                            <a href="{{ enlace.url }}" target="_blank" class="list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">{{ enlace.nombre }}</h5>
+                                    <small></small>
+                                </div>
+                                <p class="mb-1">{{ enlace.texto | raw }}</p>
+                                <small>
+                                    TAG:<em>{{ enlace.getTagsAsString|raw }}</em>
+                                </small>
+                            </a>
+
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- M O D A L -->
+    <div class="modal fade" id="modal-nuevo-contenido" style="display: none;" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h5 class="modal-title text-white">Agregar nuevo contenido</h5>
+                    <button type="button" class="close bg-primary" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(form, {'attr': {'id': 'form-nueva-biblioteca', 'novalidate': true, 'enctype': 'multipart/form-data', 'action': path('biblioteca_inicio')}}) }}
+                    {{ form_row(form._token) }}
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {{ form_label(form.nombre) }}
+                                    {{ form_widget(form.nombre) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {{ form_label(form.url) }}
+                                    {{ form_widget(form.url) }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {{ form_label(form.texto) }}
+                                    {{ form_widget(form.texto) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {{ form_label(form.adjuntos) }}
+                                    {{ form_widget(form.adjuntos) }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {{ form_label(form.contacto) }}
+                                    {{ form_widget(form.contacto) }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {{ form_label(form.tags) }}
+                                    {{ form_widget(form.tags) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-dismiss="modal">
+                            Cerrar
+                        </button>
+                        <button type="submit" id="btn-enviar" class="btn btn-success">
+                            Guardar
+                        </button>
+                    </div>
+                    {{ form_end(form, { render_rest: false }) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- F I N   M O D A L -->
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <!-- jQuery Form Validator -->
+
+{#    <link rel="stylesheet" href="{{ asset('bower_components/jquery-form-validator/form-validator/theme-default.min.css') }}"/>#}
+    <link rel="stylesheet" href="{{ asset('bower_components/bootstrap-datepicker/css/bootstrap-datepicker3.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('bower_components/select2/css/select2.min.css') }}"/>
+    <link href="{{ asset('assets/pages/jquery.filer/css/jquery.filer.css') }}" type="text/css" rel="stylesheet"/>
+    <link href="{{ asset('assets/pages/jquery.filer/css/themes/jquery.filer-dragdropbox-theme.css') }}" type="text/css" rel="stylesheet"/>
+
+    <style rel="stylesheet">
+        .show {
+            justify-items: start;
+            display: block !important;
+        }
+    </style>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <!-- Select2 -->
+    <script src="{{ asset('bower_components/select2/js/select2.full.min.js') }}"></script>
+    <!-- Boostrap Datepicker -->
+    <script src="{{ asset('bower_components/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+    <!-- Modernizr -->
+    <script src="{{ asset('bower_components/modernizr/js/modernizr.js') }}"></script>
+    <!-- jQuery Form Validator -->
+{#    <script src="{{ asset('bower_components/jquery-form-validator/form-validator/jquery.form-validator.min.js') }}"></script>#}
+    <script src="{{ asset('assets/pages/jquery.filer/js/jquery.filer.min.js') }}"></script>
+    <script src="{{ asset('assets/pages/filer/jquery.fileuploads.init.js') }}"></script>
+    <script src="{{ asset('js/tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: "#biblioteca_texto",
+            branding: false,
+            menubar: false,
+            statusbar: false,
+            plugins: "link image code",
+            toolbar:
+                "bold italic | " +
+                "alignleft aligncenter alignright alignjustify | " +
+                "bullist numlist checklist outdent indent | link media",
+        });
+
+        $(document).ready(function () {
+
+            $('#biblioteca_adjunto').filer({
+                limit: 1,
+                maxSize: 1,
+                extensions: ['jpg', 'jpeg', 'png', 'gif', 'pdf'],
+                changeInput: true,
+                showThumbs: true,
+                addMore: false,
+                captions: {
+                    button: "Seleccione Archivo",
+                    feedback: "selecccione archivo a subir",
+                    feedback2: "archivos seleccionados",
+                    drop: "Drop file here to Upload",
+                    removeConfirmation: "Esta seguro de eliminar el archivo?",
+                    errors: {
+                        filesLimit: "Solo {fi-limit} archivo esta permitido subir.",
+                        filesType: "solo archivos jpg,jpeg,png,gif,pdf esta permitido subir",
+                        filesSize: "{fi-name} es demasiado grande! Suba archivos menores a {fi-maxSize} MB.",
+                        filesSizeAll: "Los archivos son demasiado grandes ! Suba archivos menores a {fi-maxSize} MB."
+                    }
+                },
+            });
+
+            $("#biblioteca_tags").select2({
+                placeholder: "Tags",
+                allowClear: true,
+                width: "100%",
+            });
+
+
+            $.validate({
+                lang: 'es',
+                borderColorOnError : 'red',
+                addValidClassOnAll : false,
+                decimalSeparator : '.',
+                //errorMessagePosition:'inline',
+                modules : 'file,date,logic'
+            });
+
+            var modal_nuevo_contenido = $('#modal-nuevo-contenido').modal({
+                //backdrop: 'static',
+                backdrop: false,
+                keyboard: true,
+                show: false
+            }).on('hide.bs.modal', function (e) {
+                return false;
+            });
+        });
+    </script>
+
+{% endblock %}

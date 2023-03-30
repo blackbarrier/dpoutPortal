@@ -1,0 +1,230 @@
+{% extends 'base_public.html.twig' %} {% block title %}{% endblock %} {% block
+	body %}
+<style>
+    .titulo {
+        color: #009aae;
+        font-size: 36px;
+        font-weight: bolder;
+    }
+    .fecha {
+        color: #009aae;
+        font-weight: bolder;
+    }
+    .bajadaarea1 {
+        color: #706f6f;
+        font-size: 25px;
+        line-height: 130%;
+        padding-right: 45px;
+        padding-left: 5px;
+        margin: 20px 0 0px;
+        font-family: "EncodeBold", sans-serif !important;
+        font-family: var(--fuente_bold) !important;
+        text-align: justify;
+    }
+
+    a.link_ver_mas {
+        text-transform: uppercase;
+        font-size: 17px;
+    }
+
+    :any-link {
+        text-decoration: none;
+    }
+    b,
+    strong {
+        font-family: "EncodeSans", sans-serif !important;
+    }
+
+    .results__options {
+        width: 100%;
+    }
+    .compartir {
+        margin: 5px 20px 20px -70px;
+        display: flex;
+        flex-direction: column;
+    }
+    .comparte {
+        margin-top: 10px;
+    }
+
+
+</style>
+<div class="container mt-5" style="margin-bottom: 50px">
+    <div class="row justify-content-md-center mt-5">
+        <div class="col col-md-11">
+            <h1 class="titulo">
+                {{ contenido.nombre }}
+            </h1>
+            <p class="fecha"> &nbsp;{{contenido.organismo.nombre}} </p>
+            <p class="bajadaarea1">
+                {{ contenido.texto|raw }}
+            </p>
+            <br>
+            <div class="field-items"><div class="field-item even"><img typeof="foaf:Image" src="https://www.gba.gob.ar/sites/default/files/registro_personas/imagenes/WhatsApp%20Image%202022-08-17%20at%202.52.02%20PM_0.jpeg" width="643" height="500" alt="Mi Identidad Mi Derecho" title="ESCOBAR"></div></div>
+
+            <div class="row">
+                <div class="col-md-6"> <p class="fecha"> &nbsp;&nbsp;Fecha de publicación : {{ contenido.publicado|date('d-m-Y')}} </p></div>
+                <div class="col-md-6 text-right"> <p class="fecha"> Contacto: {{ contenido.contacto }}</p></div>
+            </div>
+        </div>
+
+        <div class="col-md-1">
+            <div class="footer-area">
+                <div class="region region-footer-second">
+                    <div id="block-block-70" class="block block-block clearfix">
+                        <div class="content" class="content" style="background: #eaeaea;">
+
+                            <div class="row footer2020 icons icons_no_mobile">
+                                <ul class="compartir">
+                                    <li class="comparte"><a href="https://twitter.com/intent/tweet?text=https://servicios.gob.gba.gob.ar:1198/apps/observatorio/public/inicio">
+                                            <button type="button" class="footer_twt_icon" title="Compartir en Twitter" aria-label="Compartir en Twitter" ></button></a>
+                                        </a>
+                                    </li>
+                                    <li class="comparte">
+                                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://servicios.gob.gba.gob.ar:1198/apps/observatorio/public/inicio">
+                                            <button type="button" class="footer_fbk_icon" title="Compartir en Facebook" aria-label="Ir al Facebook de GBA"></button></a>
+                                    </li>
+                                    <li class="comparte"><a href="https://www.linkedin.com/shareArticle?mini=true&url=https://servicios.gob.gba.gob.ar:1198/apps/observatorio/public/inicio">
+                                            <button type="button" class="footer_linkedin_icon" title="Compartir en LinkedIn" aria-label="Compartir en LinkedIn"></button></a>
+                                    </li>
+                                    <li class="comparte"><a href="https://t.me/share/url?url={https://servicios.gob.gba.gob.ar:1198/apps/observatorio/public/inicio}&text={text}">
+                                            <button type="button" class="footer_telegram_icon" title="Compartir en Telegram" aria-label="Compartir en Telegram"></button></a>
+                                    </li>
+                                    <li class="comparte"><a href="whatsapp://send?text=texto%20con%20https://servicios.gob.gba.gob.ar:1198/apps/observatorio/public/inicio">
+                                            <button type="button" class="footer_whatsapp_icon" title="Compartir en WhatsApp" aria-label="Compartir en WhatsApp"></button></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{#{% if enlaces|length > 0 %}
+<div class="row justify-content-md-center mt-5">
+<div class="col-md-12">
+{% if inicio %} ULTIMOS ENLACES AGREGADOS : {% else %} RESULTADO DE LA
+BUSQUEDA : <strong>{{ tags_seleccionados }}</strong>
+{% endif %}
+<br />
+
+<div class="list-group">
+{% for enlace in enlaces %}
+    {% if enlace.tipo.id==1 %}
+        {% set url = path('ver_enlace_interno',{'hash':enlace.hash}) %}
+    {% else %}
+        {% set url = enlace.url %}
+    {% endif%}
+<a
+  href="{{ url }}"
+  target="_blank"
+  class="list-group-item list-group-item-action"
+>
+  <div class="d-flex w-100 justify-content-between">
+    <h5 class="mb-1">{{ enlace.nombre }}</h5>
+    <small></small>
+  </div>
+  <p class="mb-1"></p>
+  <small>
+    TAG:<em>{{ enlace.tags }}</em>
+  </small>
+</a>
+
+{% endfor %}
+</div>
+</div>
+</div>
+{% endif %}#}
+</div>
+{% endblock %} {% block stylesheets %}
+        {{ parent() }}
+        <!-- jQuery Form Validator -->
+        <link
+            rel="stylesheet"
+            href="{{
+			asset(
+				'bower_components/jquery-form-validator/form-validator/theme-default.min.css'
+			)
+            }}"
+            />
+        <link
+            rel="stylesheet"
+            href="{{
+			asset('bower_components/bootstrap-datepicker/css/bootstrap-datepicker3.css')
+            }}"
+            />
+        <link
+            rel="stylesheet"
+            href="{{ asset('bower_components/select2/css/select2.min.css') }}"
+            />
+        <style>
+            /* Custom Style Select2 */
+            .select2-container .select2-selection--single {
+                height: 40px;
+            }
+            .select2-container--default
+            .select2-selection--single
+            .select2-selection__rendered {
+                background-color: inherit;
+                color: #444;
+                padding: 5px 30px 5px 20px;
+            }
+
+            .select2-container--default
+            .select2-selection--single
+            .select2-selection__arrow
+            b {
+                border-color: #009aae transparent transparent transparent;
+            }
+            .select2-container--default
+            .select2-results__option--highlighted[aria-selected] {
+                background-color: #009aae;
+            }
+        </style>
+
+    {% endblock %} {% block javascripts %}
+        {{ parent() }}
+        <!-- Select2 -->
+        <script src="{{
+        asset('bower_components/select2/js/select2.full.min.js')
+                }}"></script>
+        <!-- Boostrap Datepicker -->
+        <script src="{{
+        asset(
+                'bower_components/bootstrap-datepicker/js/bootstrap-datepicker.min.js'
+        )
+                }}"></script>
+        <!-- Modernizr -->
+        <script src="{{
+        asset('bower_components/modernizr/js/modernizr.js')
+                }}"></script>
+        <!-- jQuery Form Validator -->
+        <script src="{{
+        asset(
+                'bower_components/jquery-form-validator/form-validator/jquery.form-validator.min.js'
+        )
+                }}"></script>
+        <script>
+            $(document).ready(function () {
+                $("#temas").select2({
+                    placeholder: "Indique tema/s a buscar",
+                    allowClear: true,
+                    width: "100%",
+                });
+
+                $.validate({
+                    modules: "date, logic",
+                    lang: "es",
+                    decimalSeparator: ".",
+                    form: "#form-usuario",
+                });
+
+                $("#temas2").trigger("change");
+            });
+        </script>
+
+    {% endblock %}

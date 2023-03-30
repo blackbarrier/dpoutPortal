@@ -1,0 +1,79 @@
+{% extends 'base_public.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+    <div class="container mt-5" style="margin-bottom: 50px">
+        <h1 class="titulo">OBSERVATORIO DE POLÍTICAS POBLACIONALES Y MIGRATORIAS</h1>
+        <p class="bajadaarea1">
+            El Observatorio depende de la Subsecretaría de Políticas Poblacionales del
+            Ministerio de Gobierno y tiene como función la producción, recolección,
+            sistematización, análisis y difusión de información referida a las dinámicas
+            poblacionales de la Provincia de Buenos Aires.
+        </p>
+
+        {% include ('default/links.html.twig') %}
+
+        {% if enlaces|length > 0 %}
+            <div class="row justify-content-md-center mt-5">
+                <div class="col-md-12">
+                    <div class="list-group">
+                        {% for enlace in enlaces %}
+                            <a href="{{ enlace.url }}" target="_blank" class="list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">{{ enlace.nombre }}</h5>
+                                    <small></small>
+                                </div>
+                                <p class="mb-1"></p>
+                                <small>
+                                    TAG:<em>{{ enlace.getTagsAsString|raw }}</em>
+                                </small>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <!-- jQuery Form Validator -->
+    <link rel="stylesheet" href="{{ asset('bower_components/jquery-form-validator/form-validator/theme-default.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('bower_components/bootstrap-datepicker/css/bootstrap-datepicker3.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('bower_components/select2/css/select2.min.css') }}"/>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <!-- Select2 -->
+    <script src="{{ asset('bower_components/select2/js/select2.full.min.js') }}"></script>
+    <!-- Boostrap Datepicker -->
+    <script src="{{ asset('bower_components/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+    <!-- Modernizr -->
+    <script src="{{ asset('bower_components/modernizr/js/modernizr.js') }}"></script>
+    <!-- jQuery Form Validator -->
+    <script src="{{ asset('bower_components/jquery-form-validator/form-validator/jquery.form-validator.min.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $("#temas").select2({
+                placeholder: "Indique tema/s a buscar",
+                allowClear: true,
+                width: "100%",
+            });
+
+            $.validate({
+                modules: "date, logic",
+                lang: "es",
+                decimalSeparator: ".",
+                form: "#form-usuario",
+            });
+
+            $("#temas2").trigger("change");
+        });
+    </script>
+
+{% endblock %}

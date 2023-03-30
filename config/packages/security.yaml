@@ -1,0 +1,32 @@
+security:
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    encoders:
+         App\Entity\Usuario:
+            algorithm: bcrypt
+            cost : 4
+    providers:
+         our_db_provider:
+               entity:
+                   class: App\Entity\Usuario
+                   property: dni
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: ~
+            provider: our_db_provider
+            logout:
+                path: /logout
+                target: /login
+            guard:
+                authenticators:
+                    - App\Security\AppAuthenticator
+
+    access_control:
+        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/, roles: [ROLE_ADMIN,ROLE_SUPER_ADMIN] }
+
+
+    role_hierarchy:
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN]

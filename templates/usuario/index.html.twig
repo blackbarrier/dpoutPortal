@@ -1,0 +1,161 @@
+{% extends 'base.html.twig' %} 
+{% block title %}{{ parent() }} {% endblock %} 
+{% block body %}
+<div class="page-header card">
+    <div class="card-block">
+        <h5 class="m-b-10">Usuarios</h5>
+        
+    </div>
+</div>
+
+<div class="page-body">
+    
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="card">
+                <div class="card-block table-border-style">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <a href="{{ path('usuario_nuevo') }}" class="btn btn-gob" title="Nuevo Usuario">
+                                <i class="ion-plus"></i> Nuevo
+                            </a>
+                            <hr>
+                        </div>
+                    </div>
+                    {% if usuarios %}
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <table id="tabla-usuario" class="table table-xs responsive wrap">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">DNI</th>
+                                        <th scope="col">Nombre</th>
+
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Rol</th>
+                                        <th scope="col">Estado</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for usuario in usuarios %}
+                                    <tr>
+                                        <th scope="row">{{ usuario.dni }}</th>
+                                        <td scope="row" style="white-space:pre-wrap;">{{ usuario.apellido }}, {{ usuario.nombre }} </td>
+
+                                        <td scope="row" style="white-space:pre-wrap;">{{ usuario.email }} </td>
+                                        <td scope="row">{{ usuario.rol.abreviatura }} </td>
+                                        <td>{{ usuario.activo ? '<i class="ti-check" style="color: green;"></i>' : '<i class="ti-close" style="color: red;"></i>' }} </td>
+                                        <td>
+                                            {% if usuario.activo == 1 %}
+                                            <a class="btn btn-gob btn-mini" href="{{ path('usuario_activar', { id: usuario.id }) }}" title="Deshabilitar">
+                                                              D</a> {% else %}
+                                            <a class="btn btn-gob btn-mini" href="{{ path('usuario_activar', { id: usuario.id }) }}" title="Habilitar">
+                                                                 H</a> {% endif %}
+                                            <a class="btn btn-gob btn-mini" href="{{ path('usuario_editar', { 'id': usuario.id }) }}" title="Editar Usuario">
+                                                <i class="ti-pencil"></i></a>
+                                            <button class="btn btn-gob btn-mini btn-open-modal-eliminar" type="button" data-nombre="{{ usuario.nombre }} {{ usuario.apellido }}" data-action="{{ path('usuario_eliminar', { id: usuario.id }) }}" data-token="{{ csrf_token('delete' ~ usuario.id) }}"
+                                                data-toggle="modal" title="Eliminar Usuario">
+                                                            <i class="ti-trash"></i></button>
+                                            <a onclick="return confirm('¿Esta seguro que desea resetear la contraseña?');" title='Resetear Contraseña' class="btn btn-gob btn-mini" href="{{ path('usuario_reset_pass', { 'id': usuario.id }) }}">
+                                                <i class="fa fa-refresh" aria-hidden="true"> </i></a>
+
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Modal Eliminar -->
+<div class="modal fade" id="modal-eliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #ff5370; color: white;">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+            </div>
+            <form id="form-eliminar" method="post" action="">
+                <div class="modal-body">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="_token" id="eliminar_token" value="">
+
+                    <p style="font-size: 1.3em;">Esta seguro de eliminar el usuario?</p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-gob" data-dismiss="modal">
+                            <i class="ti-close"></i> Cancelar</button>
+                    <button type="submit" class="btn btn-gob">
+                            <i class="ti-check"></i> Aceptar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %} {% block stylesheets %} {{ parent() }}
+<link rel="stylesheet" href="{{ asset('bower_components/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" /> {% endblock %} {% block javascripts %} {{ parent() }}
+<script src="{{ asset('bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('bower_components/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('bower_components/moment/js/moment.min.js') }}"></script>
+<script src="{{ asset('bower_components/datatables.net-plugins/sorting/datetime-moment.js') }}"></script>
+<script>
+    (function() {
+        //$.fn.dataTable.moment( 'D/M/YYYY HH:mm:ss' );
+        $.fn.dataTable.moment('D/M/YYYY');
+        $('#tabla-usuario').DataTable({
+
+            'order': [
+                [1, "desc"]
+            ],
+            'columns': [{
+                'data': 'dni',
+                type: 'num',
+                sClass: 'text-center'
+            }, {
+                'data': 'nombre',
+                sClass: 'text-left'
+            }, {
+                'data': 'email',
+                sClass: 'text-left'
+            }, {
+                'data': 'rol',
+                sClass: 'text-left'
+            }, {
+                'data': 'estado',
+                sClass: 'text-center'
+            }, {
+                'data': 'opciones',
+                'orderable': false
+            }, ]
+        });
+
+        var modal_eliminar = $('#modal-eliminar').modal({
+            backdrop: 'static',
+            keyboard: false,
+            show: false
+        });
+
+        $('.btn-open-modal-eliminar').on('click', function(event) {
+            modal_eliminar.find('#form-eliminar').attr('action', $(this).data('action'));
+            modal_eliminar.find('#eliminar_token').val($(this).data('token'));
+            modal_eliminar.find('.modal-title').text('Eliminar el usuario "' + $(this).data('nombre') + '"');
+            modal_eliminar.modal('show');
+        });
+
+    })();
+</script>
+{% endblock %}

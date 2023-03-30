@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>{% block title %} Observatorio {% endblock %}</title>
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}" />
+    {% block stylesheets %}
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ asset('bower_components/bootstrap/css/bootstrap.min.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ asset('assets/icon/themify-icons/themify-icons.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ asset('assets/icon/font-awesome/css/font-awesome.min.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ asset('assets/css/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ asset('assets/css/jquery.mCustomScrollbar.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ asset('assets/css/pcoded-horizontal.min.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ asset('assets/icon/icofont/css/icofont.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ asset('assets/icon/ion-icon/css/ionicons.min.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ asset('bower_components/sweetalert/css/sweetalert.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ asset('assets/css/component.css') }}"
+    />
+    {#notificaciones#}
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ asset('assets/pages/notification/notification.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ asset('bower_components/animate.css/css/animate.css') }}"
+    />
+    
+
+    <link rel="stylesheet" href="{{ asset('js/jquery-confirm/dist/jquery-confirm.min.css') }}"/>
+    
+    {% endblock %}
+    
+    
+    {#select2#}
+    <link rel="stylesheet" href="{{ asset('bower_components/select2/css/select2.min.css') }}" />
+    
+    <!-- jQuery Form Validator -->
+    <link rel="stylesheet" href="{{ asset('bower_components/jquery-form-validator/form-validator/theme-default.min.css')}}"/>
+    <link rel="stylesheet" href="{{ asset('bower_components/bootstrap-datepicker/css/bootstrap-datepicker3.css')}}"/>
+    
+    
+    <style>
+      .pcoded .pcoded-header {
+        height: 120px;
+      }
+      
+       /* Custom Style Select2 */
+            .select2-container .select2-selection--single {
+                height: 40px;
+            }
+            .select2-container--default .select2-selection--single .select2-selection__rendered {
+                background-color: inherit;
+                color: #444;
+                padding: 5px 30px 5px 20px;
+            }
+            .select2-container--default .select2-selection--single .select2-selection__arrow b {
+
+                border-color: #009AAE transparent transparent transparent;
+            }
+            .select2-container--default  .select2-results__option--highlighted[aria-selected] {
+                background-color: #009AAE;
+            }
+            
+            
+            .select2-container--default .select2-selection--multiple .select2-selection__choice {
+            background-color: #009AAE;
+            border: 1px solid #009AAE;
+            padding: 5px 15px;
+            color: #fff;
+            }
+      
+    </style>
+    
+    
+  </head>
+  <!-- Menu horizontal static layout -->
+
+  <body>
+    <!-- Pre-loader start -->
+    <div class="theme-loader">
+      <div class="loader-track">
+        <div class="loader-bar"></div>
+      </div>
+    </div>
+    <!-- Pre-loader end -->
+
+    <div id="pcoded" class="pcoded">
+      <div class="pcoded-container">
+        <!-- Navbar Header start -->
+        <nav class="navbar header-navbar pcoded-header">
+          <div class="navbar-wrapper">
+            
+            <div class="navbar-container container-fluid">
+              <ul class="nav-left">
+                
+                <li>
+                  <img
+                    class="img-fluid ml-1"
+                    src="{{ asset('images/logo_gba_blanco.png') }}"
+                    alt=""
+                  />
+                </li>
+                {#
+                <li
+                  class="user-profile header-notification"
+                  style="text-align: center"
+                >
+                  <span
+                    style="
+                      margin-left: 250px;
+                      color: #ffffff;
+                      font-size: 16px;
+                      letter-spacing: 0.2em;
+                    "
+                    >PLATAFORMA ADHESION</span
+                  >
+                </li>
+                #}
+              </ul>
+
+              <ul class="nav-right">
+                <li class="user-profile header-notification">
+                  <a>
+                    <span
+                      >{{ app.user.apellido }} {{ app.user.nombre }} -
+                      {{ app.user.rol.descripcion }}
+                    </span>
+                    <i class="ti-angle-down"></i>
+                  </a>
+                  <ul class="show-notification profile-notification">
+                    <li>
+                      <a
+                        href="{{
+                          path('usuario_nueva_pass', { id: app.user.id })
+                        }}"
+                      >
+                        <i class="ti-reload"></i> Cambiar contrase&ntilde;a
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{{ path('logout') }}"
+                        ><i class="ti-power-off"></i> Salir</a
+                      >
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <!-- Navbar Header end -->
+
+        <div class="pcoded-main-container">
+          {% include 'menu.html.twig' %}
+
+          <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+              <div class="pcoded-inner-content">
+                <div class="main-body">
+                  <div class="page-wrapper m-t-20">
+                    {% block content %} 
+                        {% block body %}
+                        <div class="row">
+                            <div class="col-md-12">
+                                {% for type, flashMessages in app.session.flashbag.all() %} {% for
+                      flashMessage in flashMessages %}
+                                    <div class="alert alert-{{ type }} icons-alert background-{{ type }}">
+                                        {{ flashMessage | raw }}
+                                    </div>
+                                {% endfor %} {% endfor %}
+                                </div>
+                            </div>
+                        
+                        
+                        {% endblock %} 
+                    {%endblock content %}
+                    
+                    
+                    
+                    
+                  </div>
+                  <div class="cui__footer">
+                    <div class="cui__footer__inner" style="text-align: center">
+                      <a
+                        href="https://www.gba.gob.ar/gobierno"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="cui__footer__logo"
+                      >
+                        Ministerio de Gobierno - Provincia de Buenos Aires
+                        <span></span>
+                      </a>
+                      <br />
+                      <p class="mb-0">
+                        Copyright &copy; 2022 |
+                        <a
+                          href="https://www.gba.gob.ar/gobierno"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          >Direcci&oacute;n de Inform&aacute;tica</a
+                        >
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% block javascripts %}
+
+    <!-- Custom js -->
+    
+    <script src="{{ asset('bower_components/jquery/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('bower_components/jquery-ui/js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('bower_components/popper.js/js/popper.min.js') }}"></script>
+    <script src="{{ asset('bower_components/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('bower_components/jquery-slimscroll/js/jquery.slimscroll.js') }}"></script>
+    <script src="{{ asset('bower_components/modernizr/js/modernizr.js') }}"></script>
+    <script src="{{ asset('bower_components/modernizr/js/css-scrollbars.js') }}"></script>
+    <script src="{{ asset('assets/js/classie.js') }}"></script>
+    <script src="{{ asset('assets/js/modalEffects.js') }}"></script>
+    <script src="{{ asset('assets/js/pcoded.min.js') }}"></script>
+    <script src="{{ asset('assets/js/vertical/horizontal-layout.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+    <script src="{{ asset('assets/js/script.js') }}"></script>
+{#    <script src="{{ asset('assets/pages/nestable/jquery.nestable.js') }}"></script>#}
+    <script src="{{ asset('bower_components/sweetalert/js/sweetalert.min.js') }}"></script>
+
+    {#notifications#}
+    <script src="{{ asset('assets/js/bootstrap-growl.min.js') }}"></script>
+    <script src="{{
+        asset('assets/pages/notification/notification.js')
+      }}"></script>
+    <script src="{{ asset('assets/js/pcoded.min.js') }}"></script>
+    <script src="{{
+        asset('assets/js/jquery.mCustomScrollbar.concat.min.js')
+      }}"></script>
+
+    {# jquery validator #}
+    <script src="{{asset('bower_components/jquery-form-validator/form-validator/jquery.form-validator.min.js')}}"></script>
+                         
+       
+      
+    {# jquery validator #}
+
+    <!-- JQUERY CONFIRM -->
+    <script src="{{
+        asset('js/jquery-confirm/dist/jquery-confirm.min.js')
+      }}"></script>
+    <!-- FIN JQUERY CONFIRM -->
+
+    
+     <!-- Select2 -->
+    <script src="{{ asset('bower_components/select2/js/select2.full.min.js') }}"></script>       
+                
+    <!-- Boostrap Datepicker -->
+    <script src="{{asset('bower_components/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}"></script>
+    
+    <script>
+      function notify(mensaje, titulo, from, align, icon, type, animIn, animOut) {
+          $.growl({
+              icon: icon,
+              title: titulo,
+              message: mensaje,
+              url: ''
+          }, {
+              element: 'body',
+              type: type,
+              allow_dismiss: true,
+              placement: {
+                  from: from,
+                  align: align
+              },
+              offset: {
+                  x: 30,
+                  y: 30
+              },
+              spacing: 10,
+              z_index: 999999,
+              delay: 5000,
+              timer: 1000,
+              url_target: '_blank',
+              mouse_over: false,
+              animate: {
+                  enter: animIn,
+                  exit: animOut
+              },
+              icon_type: 'class',
+              template: '<div data-growl="container" class="alert" role="alert">' +
+                  '<button type="button" class="close" data-growl="dismiss">' +
+                  '<span aria-hidden="true">&times;</span>' +
+                  '<span class="sr-only">Close</span>' +
+                  '</button>' +
+                  '<span data-growl="icon"></span>' +
+                  '<span data-growl="title"></span>' +
+                  '<span data-growl="message"></span>' +
+                  '<a href="#" data-growl="url"></a>' +
+                  '</div>'
+          });
+      };
+
+      $(document).ready(function() {
+
+           $(".select2").select2({
+                    placeholder: "Seleccione",
+                    allowClear: true,
+                    width: "100%",
+                });
+                  
+
+
+          $.validate({
+              lang: 'es',
+              borderColorOnError: 'red',
+              addValidClassOnAll: true,
+              decimalSeparator: '.',
+              errorMessagePosition: 'inline',
+              modules: 'file,date,logic'
+          });
+
+
+          {%  for label, messages in app.flashes %}
+             {% for message in messages %}
+          notify("{{ message }}", "", "top", "center", "", "{{ label }}", "", "");
+           {% endfor %}
+          {% endfor %}
+      });
+    </script>
+
+    {% endblock %}
+  </body>
+</html>

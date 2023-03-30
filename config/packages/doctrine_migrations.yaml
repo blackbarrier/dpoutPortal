@@ -1,0 +1,8 @@
+#doctrine_migrations:
+#    dir_name: '%kernel.project_dir%/src/Migrations'
+#    namespace: DoctrineMigrations
+
+# problema en la versión de doctrine migrations (actualizacion)
+doctrine_migrations:
+     migrations_paths:
+# 

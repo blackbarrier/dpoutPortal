@@ -1,0 +1,255 @@
+{% extends 'base_public.html.twig' %} {% block title %}{% endblock %} {% block
+body %}
+
+<div class="container mt-5" style="margin-bottom: 50px">
+  <h1 class="titulo">ORGANISMOS</h1>
+</div>
+
+<div
+  class="container mt-5"
+  style="margin-bottom: 50px; background-color: #c0c0c0"
+>
+  <!------------------- COMIENZO BOTONES EN FONDO GRIS ------------------->
+  <div class="botones_fondo_gris">
+    
+      {% if organismos|length > 0 %}
+      
+        {% set linea = 0 %}
+        {% for organismo in organismos %}
+
+        {% if linea == 0 %}
+        <div class="row container" id="fila">
+        {% endif %}
+        <div class="col-md-4 col-sm-6 col-xs-12 botonmenu">
+          <a
+            class="btn_blanco"
+            title="{{organismo.nombre}}"
+            href="{{organismo.url}}"
+          >
+            <span class="titulo_celeste">{{organismo.nombre}}</span>
+          </a>
+        </div>
+        {% if linea == 2 %}
+        </div>
+        {% endif %}
+       
+    
+
+            {% if linea == 2 %}
+                {% set linea = 0 %}
+            {% else %}
+                {% set linea= linea + 1 %}
+            {% endif %}
+        {% endfor %}
+    
+  {% endif %}
+
+
+    
+      </div>
+
+    
+    </div>
+
+   
+    <!------------
+	<div class="row container" id="fila3">
+
+		<div class="col-md-4 col-sm-6 col-xs-12 botonmenu ">
+			<a class="btn_blanco" title="Coronavirus / Fases"
+				href="https://publicaciones.gob.gba.gob.ar/sappe/MAPA_PBA_FASES_DiSPO.pdf" target="_blank">
+				<span class="titulo_celeste">Coronavirus / Fases</span>
+				<div class="subtitlebanner_celeste">Dirección Provincial de Deuda y Crédito Público</div>
+			</a>
+		</div>
+	</div>
+------------------->
+  </div>
+  <!------------------- FIN BOTONES EN FONDO GRIS ------------------->
+</div>
+{% endblock %} {% block stylesheets %}
+{{ parent() }}
+<!-- jQuery Form Validator -->
+<link
+  rel="stylesheet"
+  href="{{
+    asset(
+      'bower_components/jquery-form-validator/form-validator/theme-default.min.css'
+    )
+  }}"
+/>
+<link
+  rel="stylesheet"
+  href="{{
+    asset('bower_components/bootstrap-datepicker/css/bootstrap-datepicker3.css')
+  }}"
+/>
+<link
+  rel="stylesheet"
+  href="{{ asset('bower_components/select2/css/select2.min.css') }}"
+/>
+
+<style>
+  :-webkit-any-link {
+    text-decoration: none;
+  }
+
+  :-moz-any-link {
+    text-decoration: none;
+  }
+
+  :any-link {
+    text-decoration: none;
+  }
+
+  .botones_fondo_gris {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #c0c0c0;
+  /*  background-color: var(--color_terciario); */
+    padding: 3px 0 30px 0px;
+  }
+
+  .botones_fondo_blanco {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .row#fila,
+  .row#fila2,
+  .row#fila3,
+  .row#fila4,
+  .row#fila5,
+  .row#fila6 {
+    display: flex;
+    justify-content: start;
+    margin: 30px 0 0 0;
+    padding-left: 0px;
+  }
+
+  .btn_blanco,
+  .btn_celeste {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    font-weight: normal;
+    line-height: 1.428571429;
+    border: 1px solid #ffffff;
+    border-radius: 15px;
+    background-color: #ffffff;
+    transition: all 0.5s ease;
+    min-height: 100px;
+    padding: 5px;
+  }
+
+  .btn_celeste {
+    background-color: #007a8a;
+   /* background-color: var(--color_principal_home); */
+    border: 1px solid #007a8a;
+   /* border: 1px solid var(--color_principal_home); */
+  }
+
+  .titulo_celeste {
+    color: #007a8a;
+   
+    font-size: 20px;
+    text-align: center;
+    margin: 0;
+  }
+
+  .titulo_blanco {
+    color: #ffffff;
+    font-size: 20px;
+    text-align: center;
+    margin: 10px 0 0px;
+  }
+
+  .btn_blanco:hover,
+  .btn_celeste:hover {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    font-weight: normal;
+    line-height: 1.428571429;
+    background-color: #007a8a;
+    /* background-color: var(--color_principal_home); */
+    border: 1px solid #007a8a;
+    /* border: 1px solid var(--color_principal_home); */
+    border-radius: 15px;
+    min-height: 100px;
+    padding: 5px;
+  }
+
+  .btn_celeste:hover {
+    background-color: #ffffff;
+    border: 2px solid #007a8a;
+   /* border: 2px solid var(--color_principal_home); */
+  }
+
+  a.btn_blanco:hover .titulo_celeste,
+  a.btn_blanco:hover .subtitlebanner_celeste {
+    color: #ffffff;
+  }
+
+  a.btn_celeste:hover .titulo_blanco {
+    color: #007a8a;
+   /* color: var(--color_principal_home); */
+  }
+
+  a.btn_celeste:hover .subtitlebanner {
+    color: #007a8a;
+   /* color: var(--color_principal_home); */
+  }
+
+  div#fila .titulo_celeste,
+  div#fila2 .titulo_celeste,
+  div#fila3 .titulo_celeste,
+  div#fila4 .titulo_blanco,
+  div#fila5 .titulo_blanco,
+  div#fila6 .titulo_blanco {
+    font-family: "EncodeBold", sans-serif !important;
+ 
+  }
+
+  .subtitlebanner,
+  .subtitlebanner_celeste {
+    color: #ffffff;
+    font-family: "EncodeSans", sans-serif !important;
+  
+    text-align: center;
+    font-size: 14px;
+    padding: 0 75px;
+    margin: 5px 0 0 0;
+  }
+
+  .subtitlebanner_celeste {
+    color: #007a8a;
+ 
+  }
+  .titulo {
+    color: #009aae;
+    font-size: 36px;
+    font-weight: bolder;
+  }
+  .bajadaarea1 {
+    color: #706f6f;
+    font-size: 25px;
+    line-height: 130%;
+    padding-right: 45px;
+    padding-left: 5px;
+    margin: 20px 0 0px;
+    font-family: "EncodeBold", sans-serif !important;
+ 
+    text-align: justify;
+  }
+</style>
+
+{% endblock %} {% block javascripts %}
+{{ parent() }}
+<!-- Select2 -->
+
+{% endblock %}

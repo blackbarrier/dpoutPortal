@@ -1,0 +1,129 @@
+{% extends 'base_login.html.twig' %} {% block body %}
+<form method="post" action="{{ url('app_login') }}">
+  <div id="profile-card" class="card z-depth-4">
+    <div class="card-content">
+      <div class="row">
+        <div class="input-field col s12 center">
+          <img src="{{ asset('images/login.svg') }}" alt="" />
+          <p class="center login-form-text" style="font-size: 10px">
+            OBSERVATORIO DE POLÍTICAS POBLACIONALES Y MIGRATORIAS
+          </p>
+          <p class="center login-form-text">Iniciar Sesi&oacute;n</p>
+        </div>
+      </div>
+      <div
+        class="card red darken-1"
+        style="margin: 0 15 0 15"
+        id="msjbox"
+        hidden
+      >
+        <div class="card-content white-text" id="msj"></div>
+      </div>
+      <div class="row margin" style="margin-bottom: 0px">
+        {% if error %}
+        <div class="alert alert-danger">
+          {{ error.messageKey|trans(error.messageData, 'security')|raw }}
+        </div>
+        {% endif %}
+        <div class="input-field col s12">
+          <input
+            type="text"
+            value="{{ last_username }}"
+            name="dni"
+            id="inputDni"
+            class="form-username form-control"
+            placeholder="Ingrese DNI"
+            required
+            autofocus
+          />
+        </div>
+      </div>
+      <div class="row margin" style="margin-bottom: 7px">
+        <div class="input-field col s12">
+          <input
+            type="password"
+            name="password"
+            id="inputPassword"
+            class="form-username form-control"
+            placeholder="Ingrese Contrase&ntilde;a"
+            required
+          />
+        </div>
+      </div>
+      <input
+        type="hidden"
+        name="_csrf_token"
+        value="{{ csrf_token('authenticate') }}"
+      />
+      <div class="row margin">
+        <div class="col s12">
+          <button
+            type="submit"
+            class="btn waves-effect waves-light col s12"
+            id="boton_ingresar"
+          >
+            Ingresar
+          </button>
+        </div>
+      </div>
+
+      <div class="row margin" style="text-align: right">
+        {#
+        <div class="col s12" style="padding-top: 20px">
+          <a href="{{ path('usuario_registrar') }}">Registrate</a>
+        </div>
+        #} {#
+        <div class="col s12" style="padding-top: 8px">
+          <a href="{{ path('tutoriales_publico') }}">Ayuda</a>
+        </div>
+        #}
+      </div>
+    </div>
+  </div>
+</form>
+<div class="cui__footer">
+  <div class="cui__footer__inner" style="text-align: center;">
+      <a href="https://www.gba.gob.ar/gobierno" target="_blank" rel="noopener noreferrer" class="cui__footer__logo">
+          Ministerio de Gobierno - Provincia de Buenos Aires <span></span>
+      </a>
+      <br/>
+      <p class="mb-0">
+          Copyright &copy; 2022 |
+          <a href="https://www.gba.gob.ar/gobierno" target="_blank" rel="noopener noreferrer">Direcci&oacute;n de Inform&aacute;tica</a>
+      </p>
+  </div>
+</div>
+
+</div>
+{% endblock %} {% block javascripts %}
+{{ parent() }}
+<script
+  src="{{ asset('materialize/assets/js/jquery.backstretch.min.js') }}"
+  crossorigin="anonymous"
+></script>
+<script>
+  "use strict";
+  $(document).ready(function () {
+    /*$.backstretch("{{ asset('images/fondo-vial.jpg') }}");*/
+
+    /* Form validation */
+    $(
+      '.login-form input[type="text"], .login-form input[type="password"], .login-form textarea'
+    ).on("focus", function () {
+      $(this).removeClass("input-error");
+    });
+    $(".login-form").on("submit", function (e) {
+      $(this)
+        .find('input[type="text"], input[type="password"], textarea')
+        .each(function () {
+          if ($(this).val() == "") {
+            e.preventDefault();
+            $(this).addClass("input-error");
+          } else {
+            $(this).removeClass("input-error");
+          }
+        });
+    });
+  });
+</script>
+{% endblock %}

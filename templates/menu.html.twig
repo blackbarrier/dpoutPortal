@@ -1,0 +1,29 @@
+<nav class="pcoded-navbar">
+  <div class="pcoded-inner-navbar">
+    <ul class="pcoded-item pcoded-left-item pcoded-left-align">
+      {% if app.user.rol.id == constant('App\\Entity\\Rol::ROLE_ADMIN') %}
+      <li class="pcoded-hasmenu">
+        <a href="{{ path('usuario') }}">
+          <span class="pcoded-mtext">Usuarios <b></b></span>
+        </a>
+      </li>
+      <li class="pcoded-hasmenu">
+        <a href="#">
+          <span class="pcoded-mtext">Portada <b></b></span>
+        </a>
+      </li>
+      <li class="pcoded-hasmenu">
+        <a href="{{ path('enlace') }}">
+          <span class="pcoded-mtext">Contenido <b></b></span>
+        </a>
+      </li>
+      <li class="pcoded-hasmenu">
+        <a href="{{ path('biblioteca_bandeja') }}">
+          <span class="pcoded-mtext">Biblioteca <b></b></span>
+        </a>
+      </li>
+
+      {% endif %}
+    </ul>
+  </div>
+</nav>

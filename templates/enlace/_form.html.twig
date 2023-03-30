@@ -1,0 +1,78 @@
+{{ form_start(form, {'attr': {'id': 'form-item', 'novalidate': '','autocomplete':'off'}}) }} 
+{{ form_row(form._token) }}
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="form-group">
+      {{ form_label(form.nombre) }}
+      {{ form_widget(form.nombre) }}
+    </div>
+  </div>
+</div>
+<div class="row">
+    
+   <div class="col-lg-2">
+    <div class="form-group">
+      {{ form_label(form.interno) }}
+      {{ form_widget(form.interno) }}
+    </div>
+  </div>     
+    
+  <div class="col-lg-8">
+    <div class="form-group">
+      {{ form_label(form.url) }}
+      {{ form_widget(form.url) }}
+    </div>
+  </div>
+ 
+  <div class="col-lg-2">
+    <div class="form-group">
+      {{ form_label(form.activo) }}
+      {{ form_widget(form.activo) }}
+    </div>
+  </div>  
+    
+</div>
+    
+<div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          {{ form_label(form.texto) }}
+          {{ form_widget(form.texto)
+          }}
+        </div>
+      </div>
+    </div>    
+    
+    
+<div class="row">
+  <div class="col-lg-12">
+    <div class="form-group">
+      {{ form_label(form.organismo) }}
+      {{ form_widget(form.organismo)
+      }}
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="form-group">
+      {{ form_label(form.tags) }}
+      {{ form_widget(form.tags) }}
+    </div>
+  </div>
+</div>
+
+<hr />
+<div class="row justify-content-center">
+  <div class="col-lg-4 mb-2" >
+    <button type="submit" class="btn btn-gob">
+      <i class="ti-save"></i> Guardar
+    </button>
+    <a class="btn btn-secondary ml-3" href="{{ path('enlace') }}"><i class="ti-close"></i> Cancelar</a>
+      
+  </div>
+</div>
+{{ form_end(form) }}
+

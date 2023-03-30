@@ -1,0 +1,20 @@
+{% extends 'base_public.html.twig' %}
+{% block body %}
+    <div class="row" style="text-align: center">
+        <div class="col-12">
+            <img src="{{ asset('images/error.png') }}" alt="Se ha producido un error">
+        </div>
+        
+        
+    </div>
+            
+        
+    <div class="row">&nbsp; </div>   
+        
+    <div class="row" style="text-align: center">
+        <div class="col-12">
+            <a href="{{ path('app_login') }}" title="volver a la aplicacion">volver</a>
+                                                            
+        </div>
+    </div>        
+{% endblock %}

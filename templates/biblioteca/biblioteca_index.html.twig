@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %} {% block title %} {{ parent() }} {%
+endblock %} {% block body %}
+<div class="page-header card">
+  <div class="card-block">
+    <h5 class="m-b-10">Biblioteca</h5>
+    <p class="text-muted m-b-10">Listado de items</p>
+  </div>
+</div>
+
+<div class="page-body">
+  
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-block table-border-style">
+          <div class="row">
+            <div class="col-lg-12">
+              <a
+                href="{{ path('enlace_nuevo') }}"
+                class="btn btn-gob"
+                title="Nuevo Enlace"
+              >
+                 
+              <hr />
+            </div>
+          </div>
+          {% if enlaces %}
+          <div class="row">
+            <div class="col-lg-12">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Organismo</th>
+
+                    <th>Tags</th>
+                    <th>Activo</th>
+
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for enlace in enlaces %}
+                  <tr>
+                    <td>{{ enlace.id }}</td>
+                    <td>{{ enlace.nombre|slice(0,50) }}</td>
+                    <td>{{ enlace.organismo }}</td>
+
+                    <td>{{ enlace.tags }}</td>
+                    <td>{{ enlace.activo }}</td>
+
+                    <td>
+                      <a href="#" class="btn btn-info">ver</a>
+                      <a href="#" class="btn btn-success">habilitar</a>
+                    </td>
+                  </tr>
+                  {% else %}
+                  <tr>
+                    <td colspan="13">no records found</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

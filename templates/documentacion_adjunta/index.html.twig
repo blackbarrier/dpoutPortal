@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DocumentacionAdjunta index{% endblock %}
+
+{% block body %}
+    <h1>DocumentacionAdjunta index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Imagen</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for documentacion_adjuntum in documentacion_adjuntas %}
+            <tr>
+                <td>{{ documentacion_adjuntum.id }}</td>
+                <td>{{ documentacion_adjuntum.nombre }}</td>
+                <td>{{ documentacion_adjuntum.imagen }}</td>
+                <td>
+                    <a href="{{ path('documentacion_adjunta_show', {'id': documentacion_adjuntum.id}) }}">show</a>
+                    <a href="{{ path('documentacion_adjunta_edit', {'id': documentacion_adjuntum.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('documentacion_adjunta_new') }}">Create new</a>
+{% endblock %}

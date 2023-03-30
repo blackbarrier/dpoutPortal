@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="page-header card">
+        <div class="card-block">
+            <h5 class="m-b-10">Editar Publicación N° {{ enlace.id }}</h5>
+            {#<p class="text-muted m-b-10">
+              Edici&oacute;n del contenido de la publicacion
+            </p>#}
+        </div>
+    </div>
+
+    <div class="page-body">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-block table-border-style">
+                        {{ include("biblioteca/_form.html.twig") }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{#{% block stylesheets %}#}
+{#  {{ parent() }}#}
+{#  <link href="{{ asset('assets/pages/jquery.filer/css/jquery.filer.css') }}" type="text/css" rel="stylesheet"/>#}
+{#  <link href="{{ asset('assets/pages/jquery.filer/css/themes/jquery.filer-dragdropbox-theme.css') }}" type="text/css" rel="stylesheet"/>#}
+
+{#  <style rel="stylesheet">#}
+{#    .show {#}
+{#      justify-items: start;#}
+{#      display: block !important;#}
+{#    }#}
+{#  </style>#}
+
+{#{% endblock %}#}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('js/tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>
+
+    <script>
+        tinymce.init({
+            selector: "#biblioteca_texto",
+            branding: false,
+            menubar: false,
+            statusbar: false,
+            plugins: "link image code",
+            toolbar:
+                "bold italic | " +
+                "alignleft aligncenter alignright alignjustify | " +
+                "bullist numlist checklist outdent indent | link media",
+        });
+
+        $(document).ready(function () {
+
+            $(".btn-publicar").on('click', function () {
+                let url = $(this).data('url');
+                let titulo = $(this).data('titulo');
+
+                $.confirm({
+                    title: titulo,
+                    content: "Esta seguro de " + titulo + "?",
+                    buttons: {
+                        confirmar: function () {
+                            window.location = url;
+                        },
+                        cancelar: function () {
+                            return;
+                        },
+                    },
+                });
+            });
+
+        });
+    </script>
+{% endblock %}

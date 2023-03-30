@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit DocumentacionAdjunta{% endblock %}
+
+{% block body %}
+    <h1>Edit DocumentacionAdjunta</h1>
+
+    {{ include('documentacion_adjunta/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('documentacion_adjunta_index') }}">back to list</a>
+
+    {{ include('documentacion_adjunta/_delete_form.html.twig') }}
+{% endblock %}

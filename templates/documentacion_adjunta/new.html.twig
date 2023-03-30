@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New DocumentacionAdjunta{% endblock %}
+
+{% block body %}
+    <h1>Create new DocumentacionAdjunta</h1>
+
+    {{ include('documentacion_adjunta/_form.html.twig') }}
+
+    <a href="{{ path('documentacion_adjunta_index') }}">back to list</a>
+{% endblock %}

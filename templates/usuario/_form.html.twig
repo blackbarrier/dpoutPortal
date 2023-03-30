@@ -1,0 +1,49 @@
+{{ form_start(form, {'attr': {'id': 'form-usuario', 'novalidate': ''}}) }} {# , 'class': 'toggle-disabled' #} {{ form_row(form._token) }}
+
+<div class="row">
+    <div class="col-lg-4">
+        <div class="form-group">
+            {{ form_label(form.dni) }} {{ form_widget(form.dni, {'attr': {'data-validation': 'required number'}}) }}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-4">
+        <div class="form-group">
+            {{ form_label(form.apellido) }} {{ form_widget(form.apellido, {'attr': {'data-validation': 'required'}}) }}
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="form-group">
+            {{ form_label(form.nombre) }} {{ form_widget(form.nombre, {'attr': {'data-validation': 'required'}}) }}
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="form-group">
+            {{ form_label(form.email) }} {{ form_widget(form.email, {'attr': {'data-validation': 'required email'}}) }}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-4">
+        <div class="form-group">
+            {{ form_label(form.rol) }} {{ form_widget(form.rol, {'attr': {'data-validation': 'required'}}) }}
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="form-group">
+            {{ form_label(form.activo) }} {{ form_widget(form.activo, {'attr': {'data-validation': 'required'}}) }}
+        </div>
+    </div>
+
+</div>
+<hr/>
+<div class="row">
+    <div class="col-lg-12 mb-2">
+        <button type="submit" class="btn btn-gob">
+            <i class="ti-save"></i> Guardar</button>
+        <a class="btn btn-gob" href="{{ path('usuario') }}">
+            <i class="ti-close"></i> Cancelar</a>
+    </div>
+</div>
+{{ form_end(form) }}

@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>{% block title %} BARRIOS CERRADOS {% endblock %}</title>
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
+    {% block stylesheets %}
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <!-- PARA EL FOTTER -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ asset('icofont/icofont.min.css') }} " />
+
+    <!-- FIN PARA EL FOTTER -->
+    <style>
+      .navbar a:hover {
+        background-color: #ffffff;
+      }
+      .footer a:hover {
+        background-color: #eaeaea;
+      }
+      button.dropbtn.nav-link {
+        background-color: white;
+        border: none;
+        padding: 14px 16px;
+        font-size: 16px;
+        font-family: "EncodeSans", sans-serif !important;
+      }
+
+      button.dropbtn.nav-link:focus {
+        outline: none;
+        outline: none;
+      }
+
+      @media only screen and (max-width: 767px) {
+        button.dropbtn.nav-link {
+          color: #70706f !important;
+          background-color: #ffffff !important;
+          text-align: right !important;
+          font-size: 16px;
+          display: block;
+          margin: auto;
+          width: -webkit-fill-available;
+          padding-right: 0;
+          padding-left: 0;
+        }
+      }
+
+      .show {
+        justify-items: start;
+        /*display: grid !important;*/
+        display: grid;
+      }
+
+      .fa.fa-bars::before {
+        cursor: pointer;
+      }
+
+      button.fa.fa-bars {
+        color: #414042 !important;
+        font-size: 26px;
+        margin-bottom: 14px !important;
+        margin-right: 0;
+        background-color: #ffffff;
+        border: none;
+        outline: none;
+      }
+
+      a {
+        -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        -ms-transition: all 0.3s ease-in-out;
+        -o-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+      }
+
+      @media (min-width: 1200px) {
+        .topnav a {
+          float: left;
+          display: block;
+          color: #f2f2f2;
+          text-align: center;
+          padding: 14px 16px;
+          text-decoration: none;
+          font-size: 17px;
+        }
+
+        div#myTopnav {
+          justify-content: right;
+        }
+        li.nav-item.bordes > a {
+          border-left: solid 1px #fff !important;
+          border-right: solid 1px #fff !important;
+          z-index: 999;
+        }
+      }
+
+      a.icon {
+        display: block !important;
+      }
+
+      @media only screen and (min-width: 768px) {
+        a.icon {
+          display: none !important;
+        }
+      }
+
+      @media only screen and (max-width: 767px) {
+        div#myTopnav {
+          margin-left: -15px;
+          margin-right: -15px;
+        }
+
+        li.nav-item.radio > a {
+          border-bottom: 1.5px solid #414042 !important;
+        }
+
+        li.nav-item.radio {
+          border: 0px solid rgb(255, 255, 255) !important;
+          border-radius: 5px !important;
+          border: none !important;
+          border-radius: 5px;
+          height: 80px;
+          padding: 0 0;
+          width: 105px;
+          top: 0px;
+          left: 38%;
+          right: 0px;
+          position: relative;
+          padding: 20px 0 0 0;
+        }
+
+        li.nav-item.bicentenario {
+          border: 0px solid rgb(255, 255, 255) !important;
+          border-radius: 5px !important;
+          border: none !important;
+          border-radius: 5px;
+          height: 115px;
+          padding: 0 0;
+          width: 105px;
+          top: 0px;
+          left: 38%;
+          right: 0px;
+          position: relative;
+          padding: 20px 0 0 0;
+        }
+
+        li.nav-item.bicentenario > a {
+          border-bottom: 1.5px solid #414042 !important;
+        }
+
+        a.nav-link {
+          color: #70706f !important;
+          background-color: #ffffff !important;
+          text-align: right !important;
+          font-size: 17px;
+        }
+
+        li.nav-item {
+          margin: -0 !important;
+          float: none !important;
+          margin-left: 20% !important;
+          margin-right: 20% !important;
+        }
+
+        ul.navbar-nav {
+          margin: 0px -31px 0 -31px !important;
+          background-color: #fff;
+        }
+
+        a.nav-link.radio:hover {
+          width: 100% !important;
+        }
+
+        a.nav-link.radio {
+          width: 100% !important;
+        }
+      }
+
+      .topnav {
+        background-color: fff !important;
+      }
+
+      a.nav-link.bicentenario {
+        padding-right: 0 !important;
+        color: transparent !important;
+        background: url(https://www.gba.gob.ar/static/gba_general/bicentenario_logo.png)
+          no-repeat top center !important;
+        background-size: contain !important;
+        margin-left: 5px !important;
+        height: 70px;
+        top: -6px;
+      }
+
+      a.nav-link.bicentenario:hover {
+        /*width: 100px;*/
+        color: transparent !important;
+        transform: scale(1.1);
+        transition: transform 0.4s ease-in-out;
+      }
+
+      a.nav-link.disabled.radio {
+        padding-right: 0 !important;
+        padding-left: 0px !important;
+        padding-top: 20px !important;
+        padding-bottom: 20px !important;
+      }
+
+      a.nav-link.radio {
+        width: 100px;
+        color: transparent !important;
+        background: url(https://gba.gob.ar/static/radioprovincia/images/logo_radioprov_21.png)
+          no-repeat top center;
+        background-size: contain;
+      }
+
+      a.nav-link.radio:hover {
+        /*width: 100px;*/
+        color: transparent !important;
+        transform: scale(1.1);
+        transition: transform 0.4s ease-in-out;
+      }
+
+      a:hover {
+        border-bottom: 0.1px solid #009aae !important;
+        background-color: #424242;
+        border-bottom: 2px solid #fff;
+        color: #fff;
+      }
+
+      .bg-light {
+        background-color: #fff !important;
+        display: flex;
+        align-items: center;
+        height: 135px;
+        -webkit-box-shadow: 0 2px 4px rgb(0 0 0 / 47%), 0 10px 0 rgb(0 0 0 / 0%);
+        -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.47),
+          0 10px 0 rgba(0, 0, 0, 0);
+        box-shadow: 0 5px 5px 0px rgb(65 64 66);
+      }
+
+      .tb-megamenu .nav > li > a {
+        border-top: 0;
+        color: #009aae !important;
+        font-weight: bold;
+        padding: 15px 14px !important;
+        text-shadow: none;
+      }
+
+      a.nav-link {
+        font-size: 16px;
+        font-family: "EncodeSans", sans-serif !important;
+      }
+
+      .navbar-light .navbar-nav .nav-link {
+        color: #009aae;
+        font-weight: bold;
+      }
+
+      li.nav-item {
+        margin-left: -1px;
+        margin-left: 15px !important;
+      }
+
+      .topnav a:hover {
+        /*background-color: #424242 !important;*/
+        /* border-bottom: 2px solid #fff;*/
+        /*color: #fff;*/
+        /*border-bottom: 0.1px solid #009aae !important;*/
+      }
+
+      @media only screen and (min-device-width: 1072px) {
+        a.navbar-brand > img {
+          /* width: 80% !important; */
+          /* height: auto !important; */
+          /* padding-left: 35% !important; */
+          width: 240px !important;
+          height: auto !important;
+          padding-left: unset !important;
+          margin-left: 0px;
+        }
+      }
+
+      @media only screen and (max-device-width: 600px) {
+        a.navbar-brand > img {
+          width: 60%;
+        }
+      }
+      /* pruebaaaaaaaaaaa /*
+
+
+/* Add a black background color to the top navigation */
+      .topnav {
+        background-color: #fff;
+        overflow: hidden;
+      }
+      /* Style the links inside the navigation bar */
+
+      /* Change the color of links on hover */
+      .topnav a:hover {
+        /*background-color: #ddd;*/
+        /*color: black;*/
+      }
+
+      /* Add an active class to highlight the current page */
+      .topnav a.active {
+        background-color: #4caf50;
+        color: white;
+      }
+
+      /* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
+      @media screen and (max-width: 740px) {
+        a.icon {
+          float: right;
+        }
+      }
+
+      /* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
+      @media screen and (max-width: 740px) {
+        .responsive {
+          position: relative;
+        }
+        .responsive a.icon {
+          position: absolute;
+          right: 0;
+          top: 0;
+        }
+        .responsive a {
+          float: none;
+          display: block;
+          text-align: left;
+        }
+      }
+
+      @media only screen and (max-width: 641px) {
+        .navbar-brand {
+          margin-top: 0px !important;
+          width: 260px !important;
+        }
+
+        .bg-light {
+          background-color: #fff !important;
+          display: flex;
+          align-items: center;
+          height: 80px;
+          box-shadow: 0 5px 5px 0px rgb(65 64 66);
+        }
+      }
+
+      .dropdown {
+        position: initial;
+        /*display: inline-block;*/
+      }
+
+      .dropdown-content {
+        color: #009aae;
+        display: none;
+        position: absolute;
+        background-color: #fff;
+        /*min-width: 160px;*/
+        /*box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
+        z-index: 1;
+        margin: 0 0 0 0;
+      }
+
+      .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+
+      .dropdown-content a:hover {
+        background-color: #fff;
+      }
+
+      .dropdown:hover .dropdown-content {
+        /*display: grid;*/
+        /*justify-items: start;*/
+      }
+
+      .dropdown:hover .dropbtn {
+        background-color: #fff;
+      }
+
+      .dropdown-content .nav-link {
+        border-bottom: 1px solid #009aae;
+        /* width: fit-content; */
+      }
+
+      a.nav-link.sub {
+        font-size: 12px;
+        width: 150px;
+        text-align: left;
+      }
+
+      .caret {
+        display: inline-block;
+        width: 0;
+        height: 0;
+        margin-left: 2px;
+        vertical-align: middle;
+        border-top: 4px dashed;
+        border-top: 4px solid\9;
+        border-right: 4px solid transparent;
+        border-left: 4px solid transparent;
+      }
+
+      a.nav-link.sub {
+        color: #009aae !important;
+        font-size: 14px;
+      }
+
+      @media only screen and (max-width: 767px) {
+        .dropdown-content {
+          color: #009aae;
+          display: none;
+          position: relative;
+          background-color: #fff;
+          /* min-width: 160px; */
+          /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
+          z-index: 1;
+          margin: 0;
+          padding: 0 30px;
+        }
+
+        a.nav-link.sub {
+          font-size: 13px;
+          width: -webkit-fill-available;
+          text-align: left;
+        }
+
+        .dropdown-content > .navbar-light .navbar-nav .nav-link {
+          color: #009aae !important;
+        }
+      }
+
+      @media only screen and (max-width: 767px) {
+        li.nav-item.radio > a {
+          border-bottom: none !important;
+        }
+
+        li.nav-item.bicentenario > a {
+          border-bottom: none !important;
+        }
+      }
+
+      @media only screen and (max-width: 767px) {
+        li.nav-item {
+          margin: -0 !important;
+          float: none !important;
+          margin-left: 20% !important;
+          margin-right: 20% !important;
+        }
+
+        .navbar-light .navbar-nav .nav-link {
+          color: #009aae;
+          font-weight: bold;
+          border-bottom: 2.5px solid #009aae;
+        }
+
+        div#myTopnav {
+          -webkit-box-shadow: 0 2px 4px rgb(0 0 0 / 47%),
+            0 10px 0 rgb(0 0 0 / 0%);
+          -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.47),
+            0 10px 0 rgba(0, 0, 0, 0);
+          box-shadow: 0 2px 4px rgb(0 0 0 / 47%), 0 10px 0 rgb(0 0 0 / 0%);
+        }
+      }
+
+      /*  ESTILO DEL FOOTER  */
+
+      .solo-mobile {
+        display: none;
+      }
+
+      @media only screen and (max-width: 900px) {
+        .icons_no_mobile {
+          display: none;
+        }
+
+        .solo-mobile {
+          display: block !important;
+        }
+      }
+
+      @media only screen and (max-width: 900px) {
+        .solo-mobile {
+          display: block !important;
+        }
+      }
+
+      @media only screen and (max-width: 767px) {
+        p {
+          margin-right: 125px !important;
+          margin-bottom: 20px !important;
+        }
+
+        p.titulofooter {
+          font-size: 25px;
+        }
+        .logoprovfooter {
+          margin-bottom: 30px;
+          padding-left: 35px;
+        }
+      }
+      .icoContacto {
+        width: 40px;
+      }
+
+      p {
+        margin: 10px 0 0;
+        padding: 0;
+      }
+      body {
+        color: #444;
+        font-family: "Encode Sans", sans-serif !important;
+        font-size: 14px;
+        line-height: 160%;
+      }
+
+      .logoprovfooter {
+        width: 170px;
+      }
+      a {
+        color: #aaa;
+        text-decoration: none !important;
+      }
+
+      p.titulofooter {
+        font-weight: bold;
+        font-size: 18px;
+        color: #414042;
+        font-family: "EncodeSemiBold", sans-serif;
+        margin: 0px 0px 10px 40px;
+      }
+
+      .row.footer2020 {
+        margin-left: 40px;
+      }
+
+      .row.footer2020.servicios {
+        display: block;
+      }
+
+      .social {
+        margin: 15px 70px 20px -40px;
+        display: flex;
+      }
+      .icons {
+        /*display: inline-flex;*/
+      }
+
+      .footer {
+        background: #eaeaea;
+        padding: 70px 0 80px;
+      }
+
+      .row.footer2020 > p > a > span {
+        font-size: 16px;
+      }
+
+      span {
+        font-family: "Encode Sans", sans-serif !important;
+        color: #414042 !important;
+      }
+
+      a span:hover {
+        color: #009aae !important;
+      }
+
+      /* Inicio Estilo link Twitter  */
+      .footer_twt_icon {
+        background-image: url(https://www.gba.gob.ar/imagenes/social/footer_icon_twtter.png);
+        padding: 5px 24px 17px 15px;
+        background-size: cover;
+        background-repeat: repeat;
+        background-position: center;
+        height: 39px;
+        background-color: #eaeaea;
+      }
+      /* Fin Estilo link facebook  */
+
+      /* Inicio Estilo link hover Twitter  */
+      .footer_twt_icon:hover {
+        background-image: url(https://www.gba.gob.ar/imagenes/social/footer_icon_thover.png);
+        background-size: cover;
+        background-repeat: repeat;
+        background-position: center;
+        height: 39px;
+        background-color: #eaeaea;
+      }
+      /* Fin Estilo link hover Twitter  */
+
+      /* Inicio Estilo link Facebook  */
+
+      .footer_fbk_icon {
+        background-image: url(https://www.gba.gob.ar/imagenes/social/footer_icon_facebook.png);
+        padding: 5px 24px 17px 15px;
+        background-size: cover;
+        background-repeat: repeat;
+        background-position: center;
+        height: 39px;
+        background-color: #eaeaea;
+      }
+      /* Fin Estilo link Facebook  */
+
+      /* Inicio Estilo link hover Facebook  */
+
+      .footer_fbk_icon:hover {
+        background-image: url(https://www.gba.gob.ar/imagenes/social/home_icon_facebookHover.png);
+        background-size: cover;
+        background-repeat: repeat;
+        background-position: center;
+      }
+      /* Fin Estilo link hover Facebook  */
+
+      /* Inicio Estilo link Instagram */
+
+      .footer_ig_icon {
+        background-image: url(https://www.gba.gob.ar/imagenes/social/footer_icon_Ig.png);
+        padding: 5px 24px 17px 15px;
+        background-size: cover;
+        background-repeat: repeat;
+        background-position: center;
+        height: 39px;
+        background-color: #eaeaea;
+      }
+      /* Fin Estilo link Instagram */
+
+      /* Inicio Estilo link hover Instagram */
+      .footer_ig_icon:hover {
+        background-image: url(https://www.gba.gob.ar/imagenes/social/footer_icon_IgHover.png);
+        background-size: cover;
+        background-repeat: repeat;
+        background-position: center;
+      }
+      /* Fin Estilo link hover Instagram */
+
+      /* Fin Estilo link youTube  */
+
+      .footer_youtube_icon {
+        background-image: url(https://www.gba.gob.ar/imagenes/social/footer_icon_youtube.png);
+        padding: 5px 24px 17px 15px;
+        background-size: cover;
+        background-repeat: repeat;
+        background-position: center;
+        height: 39px;
+        background-color: #eaeaea;
+      }
+      /* Fin Estilo link youTube  */
+
+      /* Inicio Estilo link hover youTube  */
+
+      .footer_youtube_icon:hover {
+        background-image: url(https://www.gba.gob.ar/imagenes/social/footer_icon_youtubeHover.png);
+        background-size: cover;
+        background-repeat: repeat;
+        background-position: center;
+      }
+
+      /* Fin Estilo link hover youTube  */
+
+      /* Inicio Estilo link contacto  */
+
+      .footer_contact_icon {
+        background-image: url(https://www.gba.gob.ar/imagenes/social/footer_icon_contacto.png);
+        padding: 5px 24px 17px 15px;
+        background-size: cover;
+        background-repeat: repeat;
+        background-position: center;
+        height: 39px;
+        background-color: #eaeaea;
+      }
+      /* Fin Estilo link contacto  */
+
+      /* Inicio Estilo link hover contacto  */
+
+      .footer_contact_icon:hover {
+        background-image: url(https://www.gba.gob.ar/imagenes/social/footer_icon_contactoHover.png);
+        background-size: cover;
+        background-repeat: repeat;
+        background-position: center;
+      }
+      /* Fin Estilo link hover contacto  */
+      ul {
+        display: inline-block;
+        list-style-type: none;
+      }
+      button,
+      select {
+        text-transform: none;
+        border: hidden;
+      }
+
+      @media (max-width: 840px) {
+        .row.footer2020 {
+          margin-left: 40px;
+          margin-bottom: 30px;
+        }
+
+        .row.footer2020 > p {
+          margin-left: 0;
+          font-size: 19px;
+          font-family: EncodeSans;
+          margin: 24px 0;
+          line-height: 120%;
+        }
+
+        p.titulofooter {
+          font-size: 24px;
+          color: #000;
+          font-family: "EncodeSemiBold", sans-serif;
+          margin: 0px 0px 11px 40px;
+        }
+      }
+
+      .titulo {
+        color: #009aae;
+        font-size: 36px;
+        font-weight: bolder;
+      }
+      .bajadaarea1 {
+        color: #706f6f;
+        font-size: 25px;
+        line-height: 130%;
+        padding-right: 45px;
+        padding-left: 5px;
+        margin: 20px 0 0px;
+        font-family: "EncodeBold", sans-serif !important;
+        font-family: var(--fuente_bold) !important;
+        text-align: justify;
+      }
+
+      a.link_ver_mas {
+        text-transform: uppercase;
+        font-size: 17px;
+      }
+
+      :any-link {
+        text-decoration: none;
+      }
+      b,
+      strong {
+        font-family: "EncodeSans", sans-serif !important;
+      }
+
+      .results__options {
+        width: 100%;
+      }
+
+      .titulo {
+        color: #009aae;
+        font-size: 36px;
+        font-weight: bolder;
+      }
+      .bajadaarea1 {
+        color: #706f6f;
+        font-size: 25px;
+        line-height: 130%;
+        padding-right: 45px;
+        padding-left: 5px;
+        margin: 20px 0 0px;
+        font-family: "EncodeBold", sans-serif !important;
+        font-family: var(--fuente_bold) !important;
+        text-align: justify;
+      }
+
+      a.link_ver_mas {
+        text-transform: uppercase;
+        font-size: 17px;
+      }
+
+      :any-link {
+        text-decoration: none;
+      }
+      b,
+      strong {
+        font-family: "EncodeSans", sans-serif !important;
+      }
+
+      .results__options {
+        width: 100%;
+      }
+
+      /* Custom Style Select2 */
+      .select2-container .select2-selection--single {
+        height: 40px;
+      }
+      .select2-container--default
+        .select2-selection--single
+        .select2-selection__rendered {
+        background-color: inherit;
+        color: #444;
+        padding: 5px 30px 5px 20px;
+      }
+
+      .select2-container--default
+        .select2-selection--single
+        .select2-selection__arrow
+        b {
+        border-color: #009aae transparent transparent transparent;
+      }
+      .select2-container--default
+        .select2-results__option--highlighted[aria-selected] {
+        background-color: #009aae;
+      }
+
+      /* REDES SOCIALES */
+
+      .footer_whatsapp_icon {
+        background-image: url("{{ asset('images/whatsapp.png') }}");
+        padding: 5px 24px 17px 15px;
+        background-size: cover;
+        background-repeat: repeat;
+        background-position: center;
+        height: 39px;
+      }
+      .footer_whatsapp_icon:hover {
+        background-image: url("{{ asset('images/whatsapp_hover.png') }}");
+        padding: 5px 24px 17px 15px;
+        background-size: cover;
+        background-repeat: repeat;
+        background-position: center;
+        height: 39px;
+      }
+
+      .footer_telegram_icon {
+        background-image: url("{{ asset('images/telegram.png') }}");
+        padding: 5px 24px 17px 15px;
+        background-size: cover;
+        background-repeat: repeat;
+        background-position: center;
+        height: 39px;
+      }
+      .footer_telegram_icon:hover {
+        background-image: url("{{asset('images/telegram_hover.png')}}");
+        padding: 5px 24px 17px 15px;
+        background-size: cover;
+        background-repeat: repeat;
+        background-position: center;
+        height: 39px;
+      }
+      .footer_linkedin_icon {
+        background-image: url("{{asset('images/linkedin.png')}}");
+        padding: 5px 24px 17px 15px;
+        background-size: cover;
+        background-repeat: repeat;
+        background-position: center;
+        height: 39px;
+      }
+      .footer_linkedin_icon:hover {
+        background-image: url("{{asset('images/linkedin_hover.png')}}");
+        padding: 5px 24px 17px 15px;
+        background-size: cover;
+        background-repeat: repeat;
+        background-position: center;
+        height: 39px;
+      }
+    </style>
+    {% endblock %}
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-ZCS8D9F332"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-ZCS8D9F332");
+    </script>
+  </head>
+  <!-- Menu horizontal static layout -->
+
+  <body>
+    <!-- Pre-loader start -->
+    <div class="theme-loader">
+      <div class="loader-track">
+        <div class="loader-bar"></div>
+      </div>
+    </div>
+    <!-- Pre-loader end -->
+
+    <div id="pcoded" class="pcoded">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+          <a class="navbar-brand" href="https://www.gba.gob.ar/"
+            ><img
+              src="https://gba.gob.ar/imagenes/logo_gba_footer_blanco.svg"
+              alt="logo buenos aires provincia"
+          /></a>
+
+          <a class="icon" style="cursor: pointer">
+            <button
+              href="javascript:void(0);"
+              class="fa fa-bars"
+              onclick="desplegable()"
+              style="cursor: pointer"
+            ></button
+          ></a>
+
+          <div class="collapse navbar-collapse topnav" id="myTopnav">
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <button onclick="myFunction()" class="dropbtn nav-link">
+                  Institucional <span class="caret"></span>
+                </button>
+                <!--<a class="nav-link dropbtn">Institucional <span class="caret"></span> </a>-->
+
+                <div id="myDropdown" class="dropdown-content">
+                  <a
+                    class="nav-link sub"
+                    href="https://www.gba.gob.ar/areasdegobierno"
+                    >Autoridades <br />Áreas de Gobierno</a
+                  >
+                  <a
+                    class="nav-link sub"
+                    href="https://mapadelestado.gba.gob.ar/"
+                    >Mapa del Estado</a
+                  >
+                  <a
+                    class="nav-link sub"
+                    href="https://www.gba.gob.ar/municipios"
+                    >Municipios</a
+                  >
+                </div>
+              </li>
+
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="https://portal.gba.gob.ar/web/portal/"
+                  title="Servicios"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Servicios</a
+                >
+              </li>
+
+              <li class="nav-item bordes">
+                <a
+                  class="nav-link"
+                  href="https://www.gba.gob.ar/historialdenoticias2020?type_1=All&combine="
+                  target=""
+                  >Noticias</a
+                >
+              </li>
+
+              <li class="nav-item radio">
+                <a
+                  class="nav-link disabled radio"
+                  href="http://radioprovincia.gba.gob.ar/"
+                  title="Radio Provincia"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Radio</a
+                >
+              </li>
+
+              <li class="nav-item bicentenario">
+                <a
+                  class="nav-link disabled bicentenario"
+                  href="https://www.gba.gob.ar/noticias/bicentenario_provincia_de_buenos_aires"
+                  >Bicentenario</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- Navbar Header end -->
+
+      <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+          <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+              <div class="main-body">
+                <div
+                  class="page-wrapper m-t-20"
+                  style="margin-top: 1px; padding-top: 0px"
+                >
+                  {% block content %} {% block body %}{% endblock %} {% endblock
+                  content %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <div>
+              <img
+                src="https://www.gba.gob.ar/imagenes/social/provincia_icon_Footer.png"
+                class="logoprovfooter"
+                alt="ingresar a  Buenos Aires Provincia"
+              />
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="row footer2020 icons icons_no_mobile">
+              <ul class="social">
+                <li class="facebook">
+                  <a
+                    href="https://www.facebook.com/BAProvincia/"
+                    target="_blank"
+                  >
+                    <button type="button" class="footer_fbk_icon"></button>
+                  </a>
+                </li>
+                &nbsp;
+                <li class="twitter">
+                  <a href="https://twitter.com/baprovincia" target="_blank">
+                    <button type="button" class="footer_twt_icon"></button>
+                  </a>
+                </li>
+                &nbsp;
+
+                <li class="instagram">
+                  <a
+                    href="https://www.instagram.com/provinciaba/"
+                    target="_blank"
+                  >
+                    <button type="button" class="footer_ig_icon"></button>
+                  </a>
+                </li>
+                &nbsp;
+                <li class="youtube">
+                  <a
+                    href="https://www.youtube.com/channel/UCRuY8kHZHaiqAAdjcgobsNw"
+                    target="_blank"
+                  >
+                    <button type="button" class="footer_youtube_icon"></button>
+                  </a>
+                </li>
+                &nbsp;
+              </ul>
+            </div>
+
+            <br /><br />
+          </div>
+
+          <div class="col-md-3">
+            <p class="titulofooter">
+              <span style="color: #000">Gu&iacute;a Servicios</span>
+            </p>
+            <div class="row footer2020 servicios">
+              <p>
+                <a
+                  href="https://sistemas.gba.gov.ar/consulta/expedientes/"
+                  target="_blank"
+                  title=""
+                  rel="noopener noreferrer"
+                  ><span style="">Expedientes</span></a
+                >
+              </p>
+
+              <p>
+                <a
+                  href="https://www.gba.gob.ar/seguridadvial"
+                  target=""
+                  rel="noopener noreferrer"
+                  ><span>Seguridad Vial</span></a
+                >
+              </p>
+
+              <p>
+                <a
+                  href="http://www.arba.gov.ar/"
+                  target="_blank"
+                  title=""
+                  rel="noopener noreferrer"
+                  ><span>ARBA</span></a
+                >
+              </p>
+
+              <p>
+                <a
+                  href="https://www.boletinoficial.gba.gob.ar/"
+                  title=""
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><span>Bolet&iacute;n Oficial</span></a
+                >
+              </p>
+
+              <p>
+                <a href="http://www.gba.gob.ar/registrodelaspersonas"
+                  ><span>Registro de las Personas</span></a
+                >
+              </p>
+
+              <p>
+                <a href="https://www.gba.gob.ar/Politicasdeprivacidad"
+                  ><span>Pol&iacute;ticas de privacidad</span></a
+                >
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <p class="titulofooter">
+              <span style="color: #000">Uso Interno</span>
+            </p>
+            <div class="row footer2020 servicios">
+              <p>
+                <a
+                  href="https://mail.gba.gob.ar"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><span style="">Webmail GBA </span><span style=""></span
+                ></a>
+              </p>
+
+              <p>
+                <a
+                  href="https://webmail.gba.gob.ar/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><span style="">Webmail HORDE</span></a
+                >
+              </p>
+
+              <p>
+                <a
+                  href="https://sistemas.gba.gob.ar/login.php"
+                  target="_blank"
+                  title=""
+                  rel="noopener noreferrer"
+                  ><span style="">Sistemas</span></a
+                >
+              </p>
+
+              <p>
+                <a
+                  href="http://gdeba.gba.gob.ar/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><span style="">GDEBA</span></a
+                >
+              </p>
+
+              <p>
+                <a
+                  href="https://portal.rrhh.gba.gob.ar/portal/login"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><span style="">Portal del Empleado/a</span></a
+                >
+              </p>
+
+              <p>
+                <a
+                  href="https://sso.siape.gba.gov.ar/pls/orasso/orasso.wwsso_app_admin.ls_login?Site2pstoreToken=v1.4~5312A8AE~95575D5DF626EAACF82420F5D585CC6E80B8C88B92E7C8B123F5CF245E303B41D404E94B063AA10F89907B7091F9EC202FC5279A676DB343861289278BE8688679381560092CF0A56968C3020C90C9C2EE402FA88348FB355394C99FDB982809FCE67A345A8A2A8FA7E1E0454B23721E2D539B8C852199246D87512AEB8C1A4A76B42B787CECA3D7E276E8B406511B31D2003EA8709AAF552A6FCA0A01240E07F84CF6A505B0FF2C7214AF31533EC1E4FC34FBD32B0A8CD43AEA48F9206EAF6C"
+                  target="_blank"
+                  title=""
+                  ><span>SIAPE</span></a
+                >
+              </p>
+            </div>
+
+            <div class="row footer2020 icons solo-mobile">
+              <ul class="social">
+                <li class="instagram">
+                  <a
+                    href="https://www.instagram.com/provinciaba/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <button
+                      type="button"
+                      class="footer_ig_icon"
+                      title="Ir al Instagram de GBA"
+                      aria-label="Ir al Instagram de GBA"
+                      aria-hidden="true"
+                    ></button>
+                    <span class="sr-only">Instagram</span>
+                  </a>
+                </li>
+                &nbsp;
+                <li class="twitter">
+                  <a
+                    href="https://twitter.com/baprovincia"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <button
+                      type="button"
+                      class="footer_twt_icon"
+                      title="Ir al Twitter de GBA"
+                      aria-label="Ir al Twitter de GBA"
+                      aria-hidden="true"
+                    ></button>
+                    <span class="sr-only">Twitter</span>
+                  </a>
+                </li>
+                &nbsp;
+                <li class="facebook">
+                  <a
+                    href="https://www.facebook.com/BAProvincia/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <button
+                      type="button"
+                      class="footer_fbk_icon"
+                      title="Ir al Facebook de GBA"
+                      aria-label="Ir al Facebook de GBA"
+                      aria-hidden="true"
+                    ></button>
+                    <span class="sr-only">Facebook</span>
+                  </a>
+                </li>
+                &nbsp;
+                <li class="youtube">
+                  <a
+                    href="https://www.youtube.com/channel/UCRuY8kHZHaiqAAdjcgobsNw"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <button
+                      type="button"
+                      class="footer_youtube_icon"
+                      title="Ir al canal de YouTube de GBA"
+                      aria-label="Ir al canal de YouTube de GBA"
+                      aria-hidden="true"
+                    ></button>
+                    <span class="sr-only">YouTube</span>
+                  </a>
+                </li>
+                &nbsp;
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% block javascripts %}
+    <!-- Custom js -->
+    <script src="{{
+        asset('bower_components/jquery/js/jquery.min.js')
+      }}"></script>
+    <script src="{{
+        asset('bower_components/jquery-ui/js/jquery-ui.min.js')
+      }}"></script>
+    <script src="{{
+        asset('bower_components/popper.js/js/popper.min.js')
+      }}"></script>
+    <script src="{{
+        asset('bower_components/bootstrap/js/bootstrap.min.js')
+      }}"></script>
+    <script src="{{
+        asset('bower_components/jquery-slimscroll/js/jquery.slimscroll.js')
+      }}"></script>
+    <script src="{{
+        asset('bower_components/modernizr/js/modernizr.js')
+      }}"></script>
+    <script src="{{
+        asset('bower_components/modernizr/js/css-scrollbars.js')
+      }}"></script>
+    <script src="{{ asset('assets/js/classie.js') }}"></script>
+    <script src="{{ asset('assets/js/modalEffects.js') }}"></script>
+    <script src="{{ asset('assets/js/pcoded.min.js') }}"></script>
+    <script src="{{
+        asset('assets/js/vertical/horizontal-layout.min.js')
+      }}"></script>
+    <script src="{{
+        asset('assets/js/jquery.mCustomScrollbar.concat.min.js')
+      }}"></script>
+    <script src="{{ asset('assets/js/script.js') }}"></script>
+    <script src="{{
+        asset('assets/pages/nestable/jquery.nestable.js')
+      }}"></script>
+    <script src="{{
+        asset('bower_components/sweetalert/js/sweetalert.min.js')
+      }}"></script>
+
+    {#notifications#}
+    <script src="{{ asset('assets/js/bootstrap-growl.min.js') }}"></script>
+    <script src="{{
+        asset('assets/pages/notification/notification.js')
+      }}"></script>
+    <script src="{{ asset('assets/js/pcoded.min.js') }}"></script>
+    <script src="{{
+        asset('assets/js/jquery.mCustomScrollbar.concat.min.js')
+      }}"></script>
+
+    {# jquery validator #}
+    <script src="{{
+        asset(
+          'js/jQuery-Form-Validator-master/form-validator/jquery.form-validator.min.js'
+        )
+      }}"></script>
+    {# jquery validator #}
+
+    <script type="text/javascript">
+      /* Toggle between showing and hiding the navigation menu links when the user clicks on the hamburger menu / bar icon */
+      function desplegable() {
+        var x = document.getElementById("myTopnav");
+        if (x.style.display === "block") {
+          x.style.display = "none";
+        } else {
+          x.style.display = "block";
+        }
+      }
+
+      /* When the user clicks on the button,
+      toggle between hiding and showing the dropdown content */
+      function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+      }
+
+      // Close the dropdown if the user clicks outside of it
+      window.onclick = function (event) {
+        if (!event.target.matches(".dropbtn")) {
+          var dropdowns = document.getElementsByClassName("dropdown-content");
+          var i;
+          for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains("show")) {
+              openDropdown.classList.remove("show");
+            }
+          }
+        }
+      };
+    </script>
+
+    {% endblock %}
+  </body>
+</html>

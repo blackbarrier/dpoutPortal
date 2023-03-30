@@ -1,0 +1,91 @@
+{{ form_start(form, {'attr': {'id': 'form-item', 'novalidate': '','autocomplete':'off'}}) }}
+{{ form_row(form._token) }}
+
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          {{ form_label(form.nombre) }}
+          {{ form_widget(form.nombre) }}
+         
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          {{ form_label(form.url) }}
+          {{ form_widget(form.url) }}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          {{ form_label(form.texto) }}
+          {{ form_widget(form.texto)}}
+          
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    {{ form_label(form.adjuntos) }}
+                    {{ form_widget(form.adjuntos) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    {{ form_label(form.contacto) }}
+                    {{ form_widget(form.contacto) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    {{ form_label(form.tags) }}
+                    {{ form_widget(form.tags, {'attr': {'data-validation': 'required'}}) }}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    {{ form_label(form.activo) }}
+                    {{ form_widget(form.activo, {'attr': {'data-validation': 'required'}}) }}
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="row align-center">
+            <div class="col-2 mb-2">
+                <button type="submit" class="btn btn-gob">
+                    <i class="ti-save"></i> Editar
+                </button>
+            </div>
+            <div class="col-2 mb-2">
+              {% if (not enlace.publicado) %}
+                <button type="button" data-titulo="Publicar Cobtenido" data-url="{{path('biblioteca_publicar', { hash: enlace.hash })}}" class="btn btn-success btn-publicar">
+                    <i class="ti-upload"></i> Publicar
+                </button>
+              {% else %}
+                <button type="button" data-titulo="Bajar Publicación" data-url="{{path('biblioteca_publicar', { hash: enlace.hash })}}" class="btn btn-warning btn-publicar">
+                  <i class="ti-download"></i> Bajar Publicación
+                </button>
+              {% endif %}
+            </div>
+
+        </div>
+    </div>
+    <div class="col-sm-2"></div>
+</div>
+{{ form_end(form) }}
